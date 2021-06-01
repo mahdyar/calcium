@@ -63,9 +63,12 @@ class _MainPageState extends State<MainPage> {
     ContextModel contextModel = ContextModel();
     double calculated = expression.evaluate(EvaluationType.REAL, contextModel);
 
+    // Removes all the trailing zeros since it's of type of double.
+    String result = calculated.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
+
     setState(() {
       _history = _expression;
-      _expression = calculated.toString();
+      _expression = result;
     });
   }
 
