@@ -1,3 +1,4 @@
+import 'package:calcium/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:calcium/widgets/CalculatorButton.dart';
@@ -29,39 +30,40 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void onClearClick(String c){
+  void onClearClick(String c) {
     setState(() {
       _expression = '';
     });
   }
 
-  void calculate(String equal){
-    Parser p = Parser();
-    Expression exp = p.parse(_expression);
-    ContextModel cm = ContextModel();
-    double eval = exp.evaluate(EvaluationType.REAL, cm);
+  void calculate(String equal) {
+    /* 
+     * Using math_expressions package: https://pub.dev/packages/math_expressions
+     * It takes an expression and returns the calculated value.
+    */
+
+    Parser parser = Parser();
+    Expression expression = parser.parse(_expression);
+    ContextModel contextModel = ContextModel();
+    double calculated = expression.evaluate(EvaluationType.REAL, contextModel);
 
     setState(() {
       _history = _expression;
-      _expression = eval.toString();
+      _expression = calculated.toString();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: Text(widget.title),
-      // ),
-      backgroundColor: Color(0xFF283637),
+      backgroundColor: kMainColor,
       body: Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
         Container(
           padding: EdgeInsets.only(right: 12),
           child: Text(
             _history,
             style: GoogleFonts.rubik(
-                textStyle: TextStyle(fontSize: 24), color: Color(0xFF545F61)),
+                textStyle: TextStyle(fontSize: 24), color: kHistoryColor),
           ),
           alignment: Alignment(1, 1),
         ),
@@ -70,35 +72,34 @@ class _MainPageState extends State<MainPage> {
           child: Text(
             _expression,
             style: GoogleFonts.rubik(
-                textStyle: TextStyle(fontSize: 48), color: Colors.white),
+                textStyle: TextStyle(fontSize: 48), color: kWhite),
           ),
-          alignment: Alignment(1, 1),
+          alignment: kExpressionAligment,
         ),
         SizedBox(height: 20),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               CalculatorButton(
-                label: 'AC',
-                fillColor: 0xFF6C807F,
-                textSize: 24,
-                callback: onAllClearClick
-              ),
+                  label: 'AC',
+                  fillColor: kClearButtonsColor,
+                  textSize: 24,
+                  callback: onAllClearClick),
               CalculatorButton(
                 label: 'C',
-                fillColor: 0xFF6C807F,
+                fillColor: kClearButtonsColor,
                 callback: onClearClick,
               ),
               CalculatorButton(
                 label: '%',
-                fillColor: 0xFFFFFFFF,
-                textColor: 0xFF65BDAC,
+                fillColor: kOperationButtonsColor,
+                textColor: kOperationButtonTextColor,
                 callback: onNumberClick,
               ),
               CalculatorButton(
                 label: '/',
-                fillColor: 0xFFFFFFFF,
-                textColor: 0xFF65BDAC,
+                fillColor: kOperationButtonsColor,
+                textColor: kOperationButtonTextColor,
                 callback: onNumberClick,
               ),
             ]),
@@ -119,8 +120,8 @@ class _MainPageState extends State<MainPage> {
               ),
               CalculatorButton(
                 label: '×',
-                fillColor: 0xFFFFFFFF,
-                textColor: 0xFF65BDAC,
+                fillColor: kOperationButtonsColor,
+                textColor: kOperationButtonTextColor,
                 callback: onNumberClick,
               ),
             ]),
@@ -141,8 +142,8 @@ class _MainPageState extends State<MainPage> {
               ),
               CalculatorButton(
                 label: '-',
-                fillColor: 0xFFFFFFFF,
-                textColor: 0xFF65BDAC,
+                fillColor: kOperationButtonsColor,
+                textColor: kOperationButtonTextColor,
                 callback: onNumberClick,
               ),
             ]),
@@ -163,8 +164,8 @@ class _MainPageState extends State<MainPage> {
               ),
               CalculatorButton(
                 label: '+',
-                fillColor: 0xFFFFFFFF,
-                textColor: 0xFF65BDAC,
+                fillColor: kOperationButtonsColor,
+                textColor: kOperationButtonTextColor,
                 callback: onNumberClick,
               ),
             ]),
@@ -186,8 +187,8 @@ class _MainPageState extends State<MainPage> {
               ),
               CalculatorButton(
                 label: '=',
-                fillColor: 0xFFFFFFFF,
-                textColor: 0xFF65BDAC,
+                fillColor: kOperationButtonsColor,
+                textColor: kOperationButtonTextColor,
                 callback: calculate,
               ),
             ]),

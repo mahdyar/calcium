@@ -12,14 +12,8 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Calcium',
       theme: ThemeData(
-        primaryColor: kMainColor,
-        scaffoldBackgroundColor: kMainColor,
-        textTheme: TextTheme(bodyText2: TextStyle(color: Colors.white)),
-        fontFamily: 'IRANYekan',
-      ),
+          primaryColor: kMainColor, scaffoldBackgroundColor: kMainColor),
       home: MainPage(title: 'Calcium'),
     );
   }
 }
-
-
