@@ -6,11 +6,13 @@ class CalculatorButton extends StatelessWidget {
       {required this.label,
       this.textColor = 0xFFFFFFFF,
       this.fillColor = 0x00ffffff,
-      this.textSize = 28});
+      this.textSize = 28,
+      required this.callback});
   final String label;
   final int textColor;
   final int fillColor;
   final double textSize;
+  final Function callback;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +21,9 @@ class CalculatorButton extends StatelessWidget {
           width: 65,
           height: 65,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              callback(label);
+            },
             child: Text(label,
                 style:
                     GoogleFonts.rubik(textStyle: TextStyle(fontSize: textSize))),
