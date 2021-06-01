@@ -37,6 +37,14 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  void onBackSpaceClick() {
+    if (_expression != '' && _expression.length > 0) {
+      setState(() {
+        _expression = _expression.substring(0, _expression.length - 1);
+      });
+    }
+  }
+
   void calculate(String equal) {
     /*
      * Replaces all human readable characters to
@@ -86,30 +94,25 @@ class _MainPageState extends State<MainPage> {
         ),
         SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            CalculatorButton(
-              label: '√',
-              fillColor: kOperationButtonsColor,
-              textColor: kOperationButtonTextColor,
-              callback: onNumberClick,
-            ),
             SizedBox(width: 15),
+            CalculatorButton(
+                label: 'AC',
+                fillColor: kClearButtonsColor,
+                textSize: 22,
+                callback: onAllClearClick),
+            SizedBox(width: 15),
+            CalculatorButton(
+              label: 'C',
+              fillColor: kClearButtonsColor,
+              callback: onClearClick,
+            ),
           ],
         ),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              CalculatorButton(
-                  label: 'AC',
-                  fillColor: kClearButtonsColor,
-                  textSize: 22,
-                  callback: onAllClearClick),
-              CalculatorButton(
-                label: 'C',
-                fillColor: kClearButtonsColor,
-                callback: onClearClick,
-              ),
               CalculatorButton(
                 label: '%',
                 fillColor: kOperationButtonsColor,
@@ -121,6 +124,25 @@ class _MainPageState extends State<MainPage> {
                 fillColor: kOperationButtonsColor,
                 textColor: kOperationButtonTextColor,
                 callback: onNumberClick,
+              ),
+              CalculatorButton(
+                label: '√',
+                fillColor: kOperationButtonsColor,
+                textColor: kOperationButtonTextColor,
+                callback: onNumberClick,
+              ),
+              MaterialButton(
+                // Backspace Button
+
+                onPressed: onBackSpaceClick,
+                color: kWhite,
+                textColor: Color(kOperationButtonTextColor),
+                child: Icon(
+                  Icons.backspace_rounded,
+                  size: 20,
+                ),
+                padding: EdgeInsets.all(20),
+                shape: CircleBorder(),
               ),
             ]),
         Row(
