@@ -6,7 +6,7 @@ class CalculatorButton extends StatelessWidget {
       {required this.label,
       this.textColor = 0xFFFFFFFF,
       this.fillColor = 0x00ffffff,
-      this.textSize = 28,
+      this.textSize = 26,
       required this.callback});
   final String label;
   final int textColor;
@@ -18,8 +18,8 @@ class CalculatorButton extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       child: SizedBox(
-          width: 65,
-          height: 65,
+          width: 60,
+          height: 60,
           child: TextButton(
             onPressed: () {
               callback(label);

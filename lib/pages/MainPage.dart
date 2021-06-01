@@ -49,7 +49,7 @@ class _MainPageState extends State<MainPage> {
      * Using math_expressions package: https://pub.dev/packages/math_expressions
      * It takes an expression and returns the calculated value.
     */
-    
+
     Parser parser = Parser();
     Expression expression = parser.parse(input);
     ContextModel contextModel = ContextModel();
@@ -86,12 +86,24 @@ class _MainPageState extends State<MainPage> {
         ),
         SizedBox(height: 20),
         Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            CalculatorButton(
+              label: '√',
+              fillColor: kOperationButtonsColor,
+              textColor: kOperationButtonTextColor,
+              callback: onNumberClick,
+            ),
+            SizedBox(width: 15),
+          ],
+        ),
+        Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               CalculatorButton(
                   label: 'AC',
                   fillColor: kClearButtonsColor,
-                  textSize: 24,
+                  textSize: 22,
                   callback: onAllClearClick),
               CalculatorButton(
                 label: 'C',
@@ -190,7 +202,7 @@ class _MainPageState extends State<MainPage> {
               ),
               CalculatorButton(
                 label: '00',
-                textSize: 26,
+                textSize: 22,
                 callback: onNumberClick,
               ),
               CalculatorButton(
