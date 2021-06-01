@@ -1,16 +1,9 @@
-# calcium
+<img src="https://raw.githubusercontent.com/mahdyar/calcium/main/assets/icon/calcium.png" width="100"/>
 
-A new Flutter project.
+# Calcium
 
-## Getting Started
+A simple flutter calculator
 
-This project is a starting point for a Flutter application.
+## Download
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [`Android`](https://github.com/mahdyar/calcium/releases/download/v1.0/calcium.apk)
