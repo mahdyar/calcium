@@ -1,4 +1,5 @@
 import 'package:calcium/constants.dart';
+import 'package:calcium/modules/ReplaceHumanReadableChars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:calcium/widgets/CalculatorButton.dart';
@@ -37,13 +38,20 @@ class _MainPageState extends State<MainPage> {
   }
 
   void calculate(String equal) {
+    /*
+     * Replaces all human readable characters to
+     * computer readable characters, e.g: × -> *
+    */
+
+    String input = replaceHumanReadableChars(_expression);
+
     /* 
      * Using math_expressions package: https://pub.dev/packages/math_expressions
      * It takes an expression and returns the calculated value.
     */
-
+    
     Parser parser = Parser();
-    Expression expression = parser.parse(_expression);
+    Expression expression = parser.parse(input);
     ContextModel contextModel = ContextModel();
     double calculated = expression.evaluate(EvaluationType.REAL, contextModel);
 
