@@ -19,9 +19,14 @@ class _MainPageState extends State<MainPage> {
   String _expression = '';
 
   void onNumberClick(String number) {
-    setState(() {
-      _expression += number;
-    });
+    if (number != '.' || !doesDecimalExist())
+      setState(() {
+        _expression += number;
+      });
+  }
+
+  bool doesDecimalExist() {
+    return _expression.contains('.');
   }
 
   void onAllClearClick(String ac) {
@@ -64,7 +69,8 @@ class _MainPageState extends State<MainPage> {
     double calculated = expression.evaluate(EvaluationType.REAL, contextModel);
 
     // Removes all the trailing zeros since it's of type of double.
-    String result = calculated.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
+    String result =
+        calculated.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
 
     setState(() {
       _history = _expression;
