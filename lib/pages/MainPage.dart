@@ -18,6 +18,7 @@ class _MainPageState extends State<MainPage> {
   String _history = '';
   String _expression = '';
   bool _isDecimalUsed = false;
+  bool _isCalculated = false;
 
   void onNumberClick(String number) {
     if (isAnOperator(number)) {
@@ -32,9 +33,16 @@ class _MainPageState extends State<MainPage> {
       });
     }
     if (!_isDecimalUsed || number != '.') {
-      setState(() {
-        _expression += number;
-      });
+      if (_isCalculated) {
+        setState(() {
+          _expression = number;
+          _isCalculated = false;
+        });
+      } else {
+        setState(() {
+          _expression += number;
+        });
+      }
     }
   }
 
@@ -96,6 +104,7 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       _history = _expression;
       _expression = result;
+      _isCalculated = true;
     });
   }
 
