@@ -17,28 +17,54 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   String _history = '';
   String _expression = '';
+  bool _isDecimalUsed = false;
 
   void onNumberClick(String number) {
-    setState(() {
-      _expression += number;
-    });
+    if (isAnOperator(number)) {
+      setState(() {
+        _isDecimalUsed = false;
+      });
+    }
+    if (number == '.' && !_isDecimalUsed) {
+      setState(() {
+        _isDecimalUsed = true;
+        _expression += number;
+      });
+    }
+    if (!_isDecimalUsed || number != '.') {
+      setState(() {
+        _expression += number;
+      });
+    }
+  }
+
+  bool isAnOperator(String number) {
+    return "/%√×-+".contains(number);
   }
 
   void onAllClearClick(String ac) {
     setState(() {
       _history = '';
       _expression = '';
+      _isDecimalUsed = false;
     });
   }
 
   void onClearClick(String c) {
     setState(() {
       _expression = '';
+      _isDecimalUsed = false;
     });
   }
 
   void onBackSpaceClick() {
     if (_expression != '' && _expression.length > 0) {
+      if (_expression.substring(_expression.length - 1, _expression.length) ==
+          '.') {
+        setState(() {
+          _isDecimalUsed = false;
+        });
+      }
       setState(() {
         _expression = _expression.substring(0, _expression.length - 1);
       });
@@ -64,7 +90,8 @@ class _MainPageState extends State<MainPage> {
     double calculated = expression.evaluate(EvaluationType.REAL, contextModel);
 
     // Removes all the trailing zeros since it's of type of double.
-    String result = calculated.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
+    String result =
+        calculated.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
 
     setState(() {
       _history = _expression;
