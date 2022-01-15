@@ -133,19 +133,23 @@ class _MainPageState extends State<MainPage> {
         ),
         SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            SizedBox(width: 15),
             CalculatorButton(
                 label: 'AC',
                 fillColor: kClearButtonsColor,
                 textSize: 22,
                 callback: onAllClearClick),
-            SizedBox(width: 15),
             CalculatorButton(
               label: 'C',
               fillColor: kClearButtonsColor,
               callback: onClearClick,
+            ),
+            SizedBox(
+              width: 85,
+            ),
+            SizedBox(
+              width: 85,
             ),
           ],
         ),
