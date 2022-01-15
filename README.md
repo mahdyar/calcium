@@ -6,7 +6,7 @@ A simple flutter calculator
 
 ## Download
 
-- [`Android`](https://github.com/mahdyar/calcium/releases/download/v1.0/calcium.apk)
+- [`Android`](https://github.com/mahdyar/calcium/releases/latest/download/calcium.apk)
 
 ## Screenshots
 
